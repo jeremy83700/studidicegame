@@ -1,21 +1,33 @@
+/* Règles du jeu */
 
+/*
 
-// Declaration des variables du jeu 
+- Le jeu a 2 joueurs, jouant en tours;
+- A chaque tour, un joueur lance un dé autant de fois qu'il le souhaite. Chaque résultat est ajouté à son score ROUND nommé 'enjeu' ;
+- MAIS, si le joueur lance un 1, tout son score ROUND est perdu. Après c'est au tour du joueur suivant
+- Le joueur peut choisir de "Hold" nommé "prendre la cagnotte", ce qui signifie que son score ROUND 'enjeu" est ajouté à son score GLOBAL. Après cela, c'est au tour du joueur suivant ;
+- Le premier joueur à atteindre 100 points sur le score GLOBAL remporte la partie.
+
+*/
+
+/* Code du jeu */
+
+// Déclarer les variables fondamentales du jeu
 var scores, roundScore, activePlayer, gamePlaying;
 
-// Initilisation du jeu
+// Initialiser le jeu
 init();
 
-// Ajout d'un bouton d'événement au bouton qui lance le dé (en utilisant une fonction anonyme)
+// Ajout d'un bouton d'événement roll au bouton qui lance le dé (en utilisant une fonction anonyme)
 document.querySelector('.btn-roll').addEventListener('click', function(){
     
     // Vérifier si le jeu est en cours de lecture
     if(gamePlaying) {
 
-        // 1. Creer un nombre aleatoire pour le dé
+        // 1. Créer un nombre aléatoire pour les dés
         var dice = Math.floor(Math.random() * 6) + 1;
 
-        // 2. Afficher le résultat 
+        // 2. Afficher le résultat
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';    
@@ -26,7 +38,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
             roundScore += dice;    
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
-            // Tour du prochain joueur 
+            // Tour du prochain joueur
             nextPlayer();
         }
 
@@ -34,7 +46,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     
 });
 
-// Fonctionnalité qui permet d'accumuler des points ('Prendre la cagnotte')
+// Fonctionnalité qui permet d'accumuler des points ('hold')
 document.querySelector('.btn-hold').addEventListener('click', function() {
     
     if(gamePlaying) {
@@ -42,7 +54,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         // 1. Ajout du score actuel au score global
         scores[activePlayer] += roundScore; 
 
-        // 2. Mise à jour de l'interface utilisateur (UI)
+        // 2. Mise à jour de l'interface utilisateur
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
         // 3. Vérifier si le joueur a gagné la partie
@@ -51,11 +63,11 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
             // Changer le nom du joueur en 'Gagnant!'
             document.querySelector('#name-' + activePlayer).textContent = 'Gagnant!';
 
-            // Masquer les dés
-            document.querySelector('.dice').style.display = 'aucun';
+            // Masquer les dès 
+            document.querySelector('.dice').style.display = 'none';
 
-            // Ajout de la classe 'vainqueur' au joueur
-            document.querySelector('.player-' + activePlayer + '-panel').classList.add('Gagnant');
+            // Ajout de la classe 'winner' au joueur
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
 
             // Supprimer le statut de joueur actif du gagnant
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -64,97 +76,79 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
             gamePlaying = false;
 
         } else {
-            // Si le joueur gagne la partie, alors c'est au tour du joueur suivant
+            // Si le joueur gagne la partie, c'est au tour du joueur suivant
             nextPlayer();
         }
     }
 });
 
-// Restarting the game after clicking the 'New Game' button 
+// Redémarrer le jeu après avoir cliqué sur le bouton "Nouveau jeu" 
 document.querySelector(".btn-new").addEventListener('click', init);
 
-// Function that initializes the game
+// Fonction qui initialise le jeu
 function init() {
 
-  // Setting the 'gamePlaying' variable to 'true' 
+  // Définir la variable 'gamePlaying' sur 'true'
   gamePlaying = true;
 
-  // Setting both scores back to 0
+  // Remettre les deux scores à 0
   scores = [0, 0];
 
-  // Setting the activePlayer back to being 'Player 1'
+  // Redéfinir l'activePlayer sur "Joueur 1"
   activePlayer = 0;
 
-  // Setting the roundScore back to 0
+  // Remettre le roundScore à 0
   roundScore = 0;
 
-  // Hiding the dice right from the beggining of the game
+  // Cacher les dés dès le début du jeu
   document.querySelector('.dice').style.display = 'none';
 
-  // Setting the scores to 0 by default (using the 'getElementById' method)
+  // Définir les scores à 0 par défaut (en utilisant la méthode 'getElementById')
+  document.getElementById('score-0').textContent = '0';
   document.getElementById('score-1').textContent = '0';
-  document.getElementById('score-2').textContent = '0';
-  document.getElementById('current-1').textContent = '0';
-  document.getElementById('current-2').textContent = '0'; 
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0'; 
 
-  // Removing the 'winner status' from the winning player
-  document.getElementById('name-1').textContent = 'Player 1';
-  document.getElementById('name-2').textContent = 'Player 2'; 
+  // Supprimer le "statut de gagnant" du joueur gagnant
+  document.getElementById('name-0').textContent = 'Joueur 1';
+  document.getElementById('name-1').textContent = 'Joueur 2'; 
+  document.querySelector('.player-0-panel').classList.remove('winner');
   document.querySelector('.player-1-panel').classList.remove('winner');
-  document.querySelector('.player-2-panel').classList.remove('winner');
 
-  // Removing the 'active status' from the winning player 
+  // Supprimer le "statut actif" du joueur gagnant
+  document.querySelector('.player-0-panel').classList.remove('active');
   document.querySelector('.player-1-panel').classList.remove('active');
-  document.querySelector('.player-2-panel').classList.remove('active');
 
-  // Make sure that the 'active status' from 'Player 2' is removed and given to 'Player 1'  
-  document.querySelector('.player-2-panel').classList.remove('active');
-  document.querySelector('.player-1-panel').classList.add('active');
+  // S'assurer que le « active status» du « Joueur 2 » est supprimé et attribué au « Joueur 1 » 
+  document.querySelector('.player-1-panel').classList.remove('active');
+  document.querySelector('.player-0-panel').classList.add('active');
 
 }
 
-// Function to giving the turn to the next player
+// Fonction pour donner le tour au joueur suivant
 function nextPlayer() {
     
-    // It's the next player's turn if the dice number is 1 (using the ternary operator)
-    activePlayer === 1 ? activePlayer = 2 : activePlayer = 1;
+    // C'est au tour du joueur suivant si le nombre de dés est 1 (en utilisant l'opérateur ternaire)
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
 
-    // Setting the roundScore back to 0
+    // Remettre le roundScore à 0
     roundScore = 0;
 
-    // Setting the current score back to 0
+    // Remettre le score actuel à 0
+    document.getElementById('current-0').textContent = '0';
     document.getElementById('current-1').textContent = '0';
-    document.getElementById('current-2').textContent = '0';
 
-    // Adding the active class to the player who has the turn now
+    // Ajouter la classe active au joueur qui a le tour maintenant
+    document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
-    document.querySelector('.player-2-panel').classList.toggle('active');
 
-    // Example of removing a class using the remove method 
+
+// Exemple de suppression d'une classe à l'aide de la méthode remove
     // document.querySelector('.player-0-panel').classList.remove('active');
-    // Example of adding a class using the add method 
+    // Exemple d'ajout d'une classe à l'aide de la méthode add
     // document.querySelector('.player-1-panel').classList.add('active');
 
-    // Hiding the dice after the active player changes 
+    // Masquer les dés après le changement de joueur actif
     document.querySelector('.dice').style.display = 'none';
 
 }
-
-/****************/
-/* EXAMPLE CODE */
-/****************/
-
-// The 'innerHTML' method is used if we want to change the style of text using HTML (setter) 
-// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
-
-// The 'textContent' method don't set HTML, just plain text (setter)
-// document.querySelector('#current-' + activePlayer).textContent = dice;
-
-// Example of reading the content of an element and storing it on a variable (getter)
-// var x = document.querySelector('#score-0').textContent;
-// console.log(x);
-
-// Example of removing a class using the remove method 
-// document.querySelector('.player-0-panel').classList.remove('active');
-// Example of adding a class using the add method 
-// document.querySelector('.player-1-panel').classList.add('active');
