@@ -1,10 +1,9 @@
-
 /* Style de la page en général */
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;   
+  box-sizing: border-box;
 }
 
 .clearfix::after {
@@ -14,7 +13,11 @@
 }
 
 body {
-  background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(images/background.webp);
+  background-image: linear-gradient(
+      rgba(62, 20, 20, 0.4),
+      rgba(62, 20, 20, 0.4)
+    ),
+    url(images/background.webp);
   background-size: cover;
   background-position: center;
   font-family: Lato;
@@ -37,12 +40,12 @@ body {
 }
 
 /* Panneaux joueurs */
-.player-1-panel,
-.player-2-panel {
-  width: 50%;
-  float: left;
-  height: 600px;
-  padding: 100px;
+.player-0-panel,
+.player-1-panel {
+    width: 50%;
+    float: left;
+    height: 600px;
+    padding: 100px;
 }
 
 /* Joueurs */
@@ -62,25 +65,28 @@ body {
   text-align: center;
   font-size: 80px;
   font-weight: 100;
-  color: #EB4D4D;
+  color: #eb4d4d;
   margin-bottom: 130px;
 }
 
-.active { background-color: #f7f7f7; }
-.active .player-name { font-weight: 300; }
+.active {
+  background-color: #f7f7f7;
+}
+.active .player-name {
+  font-weight: 300;
+}
 
 .active .player-name::after {
   content: "\2022";
   font-size: 47px;
   position: absolute;
-  color: #EB4D4D;
+  color: #eb4d4d;
   top: -7px;
   right: 10px;
-  
 }
 
 .player-current-box {
-  background-color: #EB4D4D;
+  background-color: #eb4d4d;
   color: #fff;
   width: 40%;
   margin: 0 auto;
@@ -116,8 +122,12 @@ button {
   transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover { font-weight: 600; }
-button:hover i { margin-right: 20px; }
+button:hover {
+  font-weight: 600;
+}
+button:hover i {
+  margin-right: 20px;
+}
 
 button:focus {
   outline: none;
@@ -125,7 +135,7 @@ button:focus {
 
 /* Icones */
 i {
-  color: #EB4D4D;
+  color: #eb4d4d;
   display: inline-block;
   margin-right: 15px;
   font-size: 32px;
@@ -136,9 +146,15 @@ i {
 }
 
 /* Bouttons spécifiques */
-.btn-new { top: 45px;}
-.btn-roll { top: 403px;}
-.btn-hold { top: 467px;}
+.btn-new {
+  top: 45px;
+}
+.btn-roll {
+  top: 403px;
+}
+.btn-hold {
+  top: 467px;
+}
 
 /* Dice images */
 .dice {
@@ -147,29 +163,40 @@ i {
   top: 178px;
   transform: translateX(-50%);
   height: 100px;
-  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
 }
 
-#dice1 { top: 120px; }
-#dice2 { top: 250px; }
+#dice1 {
+  top: 120px;
+}
+#dice2 {
+  top: 250px;
+}
 
-/* Winner status */ 
-.winner { background-color: #f7f7f7; }
-.winner .player-name { font-weight: 300; color: #EB4D4D; }
+/* Winner status */
+.winner {
+  background-color: #f7f7f7;
+}
+.winner .player-name {
+  font-weight: 300;
+  color: #eb4d4d;
+}
 
 /* Winning score input */
 #winningScore {
   position: absolute;
   top: 520px;
   left: 50%;
-  text-transform: uppercase; 
+  text-transform: uppercase;
   color: #555;
   font-size: 18px;
-  font-family: 'Lato';
+  font-family: "Lato";
   text-align: center;
   padding: 10px;
   width: 160px;
   transform: translateX(-50%);
 }
 
-#winningScore:focus { outline: none; }
+#winningScore:focus {
+  outline: none;
+}

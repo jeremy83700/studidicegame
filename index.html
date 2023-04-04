@@ -24,47 +24,49 @@
     <title>Jeu de dès pour examen studi</title>
   </head>
   <body>
-        <!-- Panneau Joueur 1 -->
-        <div class="wrapper clearfix">
-          <div class="player-1-panel active">
-            <div class="player-name" id="name-1">Joueur 1</div>
-            <div class="player-score" id="score-1">0</div>
-            <div class="player-current-box">
-              <div class="player-current-label">Enjeu</div>
-              <div class="player-current-score" id="current-1">0</div>
-            </div>
-          </div>
-          <!-- Fin du panneau Joueur 1 -->
-    
-          <!-- Panneau Joueur 2 -->
-          <div class="player-2-panel">
-            <div class="player-name" id="name-2">Joueur 2</div>
-            <div class="player-score" id="score-2">0</div>
-            <div class="player-current-box">
-              <div class="player-current-label">Enjeu</div>
-              <div class="player-current-score" id="current-2">0</div>
-            </div>
-          </div>
-          <!-- Fin panneau joueur 2 -->
-    
-          <!-- Boutons en français -->
-          <button class="btn-new">
-            <i class="ion-ios-plus-outline"></i>Nouveau Jeu
-          </button>
-          <button class="btn-roll"><i class="ion-ios-loop"></i>Faire rouler les dès</button>
-          <button class="btn-hold">
-            <i class="ion-ios-download-outline"></i>Prendre la cagnotte
-          </button>
-    
-          <!-- Entrée du score final -->
-          <input type="text" id="winningScore" placeholder="Score Final" />
-    
-          <!-- Dice images -->
-          <img src="images/dice-3.png" alt="Dice" class="dice" id="dice1" />
-          <img src="images/dice-3.png" alt="Dice" class="dice" id="dice2" />
+    <!-- Panneau Joueur 1 -->
+    <div class="wrapper clearfix">
+      <div class="player-0-panel active">
+        <div class="player-name" id="name-0">Joueur 1</div>
+        <div class="player-score" id="score-0">0</div>
+        <div class="player-current-box">
+          <div class="player-current-label">Enjeu</div>
+          <div class="player-current-score" id="current-0">0</div>
         </div>
-    
-        <!-- Lien fichier externe JavaScript -->
-        <script src="dicegame.js"></script>
+      </div>
+      <!-- Fin du panneau Joueur 1 -->
+
+      <!-- Panneau Joueur 2 -->
+      <div class="player-1-panel">
+        <div class="player-name" id="name-1">Joueur 2</div>
+        <div class="player-score" id="score-1">0</div>
+        <div class="player-current-box">
+          <div class="player-current-label">Enjeu</div>
+          <div class="player-current-score" id="current-1">0</div>
+        </div>
+      </div>
+      <!-- Fin panneau joueur 2 -->
+
+      <!-- Boutons en français -->
+      <button class="btn-new">
+        <i class="ion-ios-plus-outline"></i>Nouveau Jeu
+      </button>
+      <button class="btn-roll">
+        <i class="ion-ios-loop"></i>Faire rouler les dès
+      </button>
+      <button class="btn-hold">
+        <i class="ion-ios-download-outline"></i>Prendre la cagnotte
+      </button>
+
+      <!-- Entrée du score final -->
+      <input type="text" id="winningScore" placeholder="Score Final" />
+
+      <!-- Dice images -->
+      <img src="dice-3.png" alt="Dice" class="dice" id="dice1" />
+      <img src="dice-3.png" alt="Dice" class="dice" id="dice2" />
+    </div>
+
+    <!-- Lien fichier externe JavaScript -->
+    <script src="dicegame.js"></script>
   </body>
 </html>
